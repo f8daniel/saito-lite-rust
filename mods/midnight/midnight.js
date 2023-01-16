@@ -204,6 +204,7 @@ class Midnight extends GameTemplate {
   handleGameLoop(msg = null) {
     let midnight_self = this;
     this.displayPlayer();
+    console.log(JSON.parse(JSON.stringify(this.game.state)));
     ///////////
     // QUEUE //
     ///////////
@@ -451,9 +452,20 @@ class Midnight extends GameTemplate {
         success = Object.keys(this.game.state.clues).length == 3;
       }else{
         success = this.game.state[page_obj.filter.field].includes(page_obj.filter.value);  
+        console.log(`Do I have skill ${page_obj.filter.value}? ` + success);
+        if (page_obj.filter.alt_inventory && !success){
+          for (let i of this.game.state.inventory){
+            console.log(i, this.inventory[i]?.skill);
+            if (this.inventory[i]?.skill === page_obj.filter.value){
+              console.log("Success");
+              success = true;
+            }
+          }
+        }
       }
     }
 
+    console.log(success);
     if (page_obj.choices?.length > 0){
       for (let i = 0; i < page_obj.choices.length; i++){
         if (apply_filter){
@@ -667,7 +679,7 @@ class Midnight extends GameTemplate {
 
     $(".textchoice").off();
     $(".textchoice").on("click", function(){
-      midnight_self.addMOve(`page\t${next_page}`);
+      midnight_self.addMove(`page\t${next_page}`);
       midnight_self.endTurn();
     });
 

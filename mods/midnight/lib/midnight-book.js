@@ -3,7 +3,7 @@ module.exports = (game_mod) => {
     var book = {};
 
     book["001"] = {
-      text: `As you leave the Guild, your mind works quickly, listing the places where you might find some information as to the gem's whereabouts. 
+      text: `Your mind works quickly, listing the places where you might find some information as to the gem's whereabouts. 
              Most of the rich merchants in the town have houses near the Field Gate; If you can find Brass's house, you may be able to find some useful
               information there. Then again, the Merchant's Guild is just across the Market Square, and if Brass is an important merchant, he's bound to 
               have a suite of offices there. Finally, there's the Noose, the area of town around the Thieves' Guild. You hardly ever see a merchant there, 
@@ -22,6 +22,7 @@ module.exports = (game_mod) => {
         {
           option: "The Noose",
           command: "page\t203",
+          event: "203",
         },
       ],
     };
@@ -47,7 +48,9 @@ module.exports = (game_mod) => {
         {
           field: "special_skills",
           value: "lock",
+          alt_inventory: true,
         },
+      event: "003",
       choices: [
         {
           option: "try PICK LOCK skill",
@@ -59,6 +62,7 @@ module.exports = (game_mod) => {
         {
           option: "Door with Fish Symbol",
           command: "page\t163",
+          event: "163",
         },
         {
           option: "Go to Brass’s House",
@@ -352,6 +356,7 @@ module.exports = (game_mod) => {
         {
           option: "Examine the desk ",
           command: "page\t090",
+          event: "090",
         },
         {
           option: "Search for clues in Brass’s house (if you haven't already)",
@@ -377,8 +382,9 @@ module.exports = (game_mod) => {
              Eye of the Basilisk is hidden. Going down some steps at the side of the bridge, you come to a small wooden hut, 
              with the words KEEP OUT painted on the door.`,
       filter: {
-        filter: "special_skills",
+        field: "special_skills",
         value: "lock",
+        alt_inventory: true,
       },
       choices: [
         {
@@ -423,6 +429,7 @@ module.exports = (game_mod) => {
         {
           field: "special_skills",
           value: "lock",
+          alt_inventory: true,
         },
 
       choices: [
@@ -594,6 +601,7 @@ module.exports = (game_mod) => {
       filter: {
         field: "special_skills",
         value: "lock",
+        alt_inventory: true,
       },
       choices: [
         {
@@ -923,6 +931,7 @@ module.exports = (game_mod) => {
         {
           option: "Examine the desk",
           command: "page\t090",
+          event: "090",
         },
         {
           option: "Leave the Merchants’ Guild stealthily and search for clues in Brass’s house ",
@@ -983,6 +992,7 @@ module.exports = (game_mod) => {
       filter: {
           field: "special_skills",
           value: "lock",
+          alt_inventory: true,
         },
       choices: [
         {
@@ -1289,6 +1299,10 @@ module.exports = (game_mod) => {
           command: "page\t340",
           inventory: "chain",
         },
+        {
+          option: "None of these",
+          command: "page\t389",
+        },
       ],
     };
 
@@ -1298,6 +1312,7 @@ module.exports = (game_mod) => {
       filter: {
         field: "special_skills",
         value: "sneak",
+        alt_inventory: true,
       },
       choices: [
         {
@@ -1328,6 +1343,7 @@ module.exports = (game_mod) => {
       filter: {
         field: "special_skills",
         value: "sneak",
+        alt_inventory: true,
       },
       choices: [
         {
@@ -1605,12 +1621,13 @@ module.exports = (game_mod) => {
 //CLUE PAGE
     book["090"] = {
       text: `You search the desk thoroughly. There are three drawers on one side: two are locked, but you find some keys in the third drawer, and unlock them. 
-             In the desk you find the following: <br>A key, marked with the letter ‘L’<br>Coins totaling 10 gold pieces<br>A deed of purchase, 
-             showing that Brass recently bought a piece of Land called Barrow Hill<br>a letter from the Wizard Brabantius, telling Brass that ‘The Barrow Hill 
-             property has been refilled according to your instructions’. Make a note of anything you take on your Adventure Sheet.
+             In the desk you find the following: <ul><li>A key, marked with the letter ‘L’<li>Coins totaling 10 gold pieces<br>A deed of purchase, 
+             showing that Brass recently bought a piece of Land called Barrow Hill<li>a letter from the Wizard Brabantius, telling Brass that ‘The Barrow Hill 
+             property has been refilled according to your instructions’.</ul> Make a note of anything you take on your Adventure Sheet.
               The two documents are an important clue: make a note of the number of this paragraph on your Adventure Sheet. What will you do next?`,
       instant: ["changestats\tgold\t10", "key\tL\t0"],
       clue: "guild",
+      event: "090",
       choices: [
         {
           option: "Examine the iron door",
@@ -1743,6 +1760,7 @@ module.exports = (game_mod) => {
       filter: {
         field: "special_skills",
         value: "lock",
+        alt_inventory: true,
       },
       choices: [
         {
@@ -1815,6 +1833,7 @@ module.exports = (game_mod) => {
       filter: {
         field: "special_skills",
         value: "lock",
+        alt_inventory: true,
       },
       choices: [
         {
@@ -1904,6 +1923,7 @@ module.exports = (game_mod) => {
       filter: {
         field: "special_skills",
         value: "hide",
+        alt_inventory: true,
       },
       choices: [
         {
@@ -1931,9 +1951,8 @@ module.exports = (game_mod) => {
       text: "You leave the house quickly and quietly, return through the right to the Market Square. What will you do next?",
       choices: [
         {
-          option: "Go to the Merchants' Guild (If you haven't already)",
-          command: "page\t129",
-          event: "129",
+          option: "Return to where you started and try somewhere else (If you haven't already)",
+          command: "page\t001",
         },
         {
           option:
@@ -2034,9 +2053,8 @@ module.exports = (game_mod) => {
         },
         {
           option:
-            "Go back via the Market Square to the Merchant's Guild (If you haven't been there)",
-          command: "page\t129",
-          event: "129",
+            "Return to where you started and try somewhere else (if you haven't already)",
+          command: "page\t001",
         },
         {
           option:
@@ -2163,6 +2181,7 @@ module.exports = (game_mod) => {
       filter: {
         field: "special_skills",
         value: "lock",
+        alt_inventory: true,
       },
       choices: [
         {
@@ -2452,7 +2471,7 @@ module.exports = (game_mod) => {
         },
       ],
     };
-
+//>>>>
     book["144"] = {
       text: `You think about the information you’ve collected and the obstacles you’ve overcome. You must be close to the Eye of the Basilisk by now - 
              at least, you now know where it is hidden. You do know, don’t you? Where will you look for it?`,
@@ -2651,6 +2670,7 @@ module.exports = (game_mod) => {
         {
           field: "special_skills",
           value: "sneak",
+          alt_inventory: true,
         },
       choices: [
         {
@@ -2676,6 +2696,7 @@ module.exports = (game_mod) => {
         {
           field: "special_skills",
           value: "hide",
+          alt_inventory: true,
         },
       choices: [
         {
@@ -2701,6 +2722,7 @@ module.exports = (game_mod) => {
         {
           field: "special_skills",
           value: "lock",
+          alt_inventory: true,
         },
       choices: [
         {
@@ -2726,8 +2748,8 @@ module.exports = (game_mod) => {
       text: "There is no way that you could have picked up a magical weapon by this stage in the adventure - you’ve been cheating!",
       choices: [
         {
-          option: "Go back to 1 and start again - but do it honestly this time.",
-          command: "page\t001",
+          option: "You lose the game",
+          command: "",
         },
       ],
     };
@@ -2739,6 +2761,7 @@ module.exports = (game_mod) => {
       filter: {
         field: "special_skills",
         value: "hide",
+        alt_inventory: true,
       },
       choices: [
         {
@@ -2818,7 +2841,9 @@ module.exports = (game_mod) => {
       filter: {
         field: "special_skills",
         value: "lock",
+        alt_inventory: true,
       },
+      event: "163",
       choices: [
         {
           option: "Use PICK LOCK skill",
@@ -2829,12 +2854,12 @@ module.exports = (game_mod) => {
           option: "You do not have the skill, so you try the door with the coin symbol",
           command: "page\t003",
           filter: false,
+          event: "003",
         },
         {
           option:
-            "Give up on the Merchants’ Guild and look for clues in Brass's house (If you haven't already)",
-          command: "page\t156",
-          event: "156",
+            "Give up on the Merchants’ Guild and look for clues elsewhere",
+          command: "page\t001",
         },
         {
           option:
@@ -2898,6 +2923,7 @@ module.exports = (game_mod) => {
       filter : {
         field: "special_skills",
         value: "climb",
+        alt_inventory: true,
       }, 
       choices: [
         {
@@ -3096,6 +3122,7 @@ module.exports = (game_mod) => {
         {
           option: "Examine the desk",
           command: "page\t090",
+          event: "090",
         },
         {
           option:
@@ -3224,6 +3251,7 @@ module.exports = (game_mod) => {
         {
           option: "Try the office across the passage, the one with the coin symbol",
           command: "page\t003",
+          event: "003",
         },
         {
           option:
@@ -3323,6 +3351,7 @@ module.exports = (game_mod) => {
       filter: {
         field: "special_skills",
         value: "hide",
+        alt_inventory: true,
       },
       choices: [
         {
@@ -4017,6 +4046,7 @@ module.exports = (game_mod) => {
       filter: {
         field: "special_skills",
         value: "lock",
+        alt_inventory: true,
       },
       choices: [
         {
@@ -4162,6 +4192,7 @@ module.exports = (game_mod) => {
         {
           field: "special_skills",
           value: "lock",
+          alt_inventory: true,
         },
       choices: [
         {
@@ -4346,6 +4377,7 @@ module.exports = (game_mod) => {
       filter: {
         field: "special_skills",
         value: "sneak",
+        alt_inventory: true,
       },
       choices: [
         {
@@ -4366,6 +4398,7 @@ module.exports = (game_mod) => {
       filter: {
         field: "special_skills",
         value: "hide",
+        alt_inventory: true,
       },
       choices: [
         {
@@ -4519,6 +4552,7 @@ module.exports = (game_mod) => {
       filter: {
         field: "special_skills",
         value: "climb",
+        alt_inventory: true,
       },
       choices: [
         {
@@ -4581,8 +4615,9 @@ module.exports = (game_mod) => {
             you see four shapes appear in front of you. They advance threateningly. You turn round, but three more have appeared behind you, blocking your retreat. 
             Chuckling unpleasantly, the Footpads advance on you from both sides.`,
       filter: {
-        filter: "special_skills",
+        field: "special_skills",
         value: "climb",
+        alt_inventory: true,
       },
       choices: [
         {
@@ -4630,6 +4665,7 @@ module.exports = (game_mod) => {
       filter: {
         field: "special_skills",
         value: "lock",
+        alt_inventory: true,
       },
       choices: [
         {
@@ -4660,7 +4696,7 @@ module.exports = (game_mod) => {
       choices: [
         {
           option: "Cheater!",
-          command: "page\t001",
+          command: "",
         },
       ],
     };
@@ -4691,6 +4727,7 @@ module.exports = (game_mod) => {
       filter: {
         field: "special_skills",
         value: "sneak",
+        alt_inventory: true,
       },
       choices: [
         {
@@ -5092,6 +5129,7 @@ module.exports = (game_mod) => {
       filter: {
         field: "special_skills",
         value: "sneak",
+        alt_inventory: true,
       },
       choices: [
         {
@@ -5436,6 +5474,7 @@ module.exports = (game_mod) => {
       filter: {
         field: "special_skills",
         value: "lock",
+        alt_inventory: true,
       },
       choices: [
         {
@@ -5698,6 +5737,7 @@ module.exports = (game_mod) => {
       filter: {
         field: "special_skills",
         value: "lock",
+        alt_inventory: true,
       },
       choices: [
         {
@@ -5918,6 +5958,7 @@ module.exports = (game_mod) => {
       filter: {
         field: "special_skills",
         value: "climb",
+        alt_inventory: true,
       },
       choices: [
         {
@@ -5942,6 +5983,7 @@ module.exports = (game_mod) => {
       filter: {
         field: "special_skills",
         value: "sneak",
+        alt_inventory: true,
       },
       choices: [
         {
@@ -5963,6 +6005,7 @@ module.exports = (game_mod) => {
       filter: {
         field: "special_skills",
         value: "climb",
+        alt_inventory: true,
       },
       choices: [
         {
@@ -6031,10 +6074,12 @@ module.exports = (game_mod) => {
         {
           option: "Try the left-hand door (with the coin symbol)",
           command: "page\t003",
+          event: "003",
         },
         {
           option: "Try the right-hand door (with the fish symbol)",
           command: "page\t163",
+          event: "163",
         },
       ],
     };
@@ -6306,6 +6351,7 @@ module.exports = (game_mod) => {
       filter: {
         field: "special_skills",
         value: "hide", 
+        alt_inventory: true,
       },
       choices: [
         {
@@ -6338,6 +6384,7 @@ module.exports = (game_mod) => {
       filter: {
         field: "special_skills",
         value: "lock",
+        alt_inventory: true,
       },            
       choices: [
         {
@@ -6351,6 +6398,7 @@ module.exports = (game_mod) => {
           option:
             "You can't open the door, and you will have to confine your attention to the desk",
           command: "page\t090",
+          event: "090",
         },
         {
           option:
@@ -6450,6 +6498,7 @@ module.exports = (game_mod) => {
       filter: {
         field: "special_skills",
         value: "lock",
+        alt_inventory: true,
       },
       choices: [
         {
@@ -6495,6 +6544,7 @@ module.exports = (game_mod) => {
       filter: {
         field: "special_skills",
         value: "climb",
+        alt_inventory: true,
       },
       choices: [
         {
@@ -6747,10 +6797,12 @@ module.exports = (game_mod) => {
         {
           option: "The door with the coin symbol",
           command: "page\t003",
+          event: "003",
         },
         {
           option: "The door with the fish symbol",
           command: "page\t163",
+          event: "163",
         },
       ],
     };
